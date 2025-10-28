@@ -260,7 +260,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      eletrico _0: -8096873818732831647
+      eletrico _1: -3974625336172660630
+      eletrico _2: -6563169022340089805
+      eletrico _3: 4085774996068081340
+      eletrico _4: 2128541520763956346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
