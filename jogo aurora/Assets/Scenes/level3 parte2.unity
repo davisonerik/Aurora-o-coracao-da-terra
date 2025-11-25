@@ -206,6 +206,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &29719555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 29719556}
+  - component: {fileID: 29719557}
+  m_Layer: 0
+  m_Name: andar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &29719556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29719555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 219.1, y: -35.53, z: 0}
+  m_LocalScale: {x: 48.130466, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 869770494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &29719557
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29719555}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &65946739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -698184,6 +698262,11 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &869770494 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2867768251666473091, guid: d85a4aff71a8f7a4298f418ceca98edd, type: 3}
+  m_PrefabInstance: {fileID: 7508556800651784229}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &926412221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -698885,9 +698968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98f6ed894404c04797f50d99c6d2ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1704764336}
-  container: {fileID: 0}
-  maxHealth: 0
 --- !u!224 &1308410365
 RectTransform:
   m_ObjectHideFlags: 0
@@ -700915,45 +700995,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc9cc1cbfe045743809cb237bb23a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVida: 200
-  vida: 0
-  moveSpeed: 2
-  chaseRange: 20
-  stopDistance: 1.5
-  fase2Threshold: 0.5
-  projectilePrefab: {fileID: 2429725039747312845, guid: b97f40009b03a0a46bf43ad51da8398f, type: 3}
-  projectileSpawnPoints: []
-  shootCooldown: 1.2
-  shootBurst: 3
-  shootBurstDelay: 0.25
-  projectileSpeed: 6
-  meleeDamage: 10
-  meleeRange: 1.2
-  meleeCooldown: 2
-  dashDistance: 6
-  dashSpeed: 10
-  dashCooldown: 5
-  hitParticles: {fileID: 0}
-  dieParticles: {fileID: 0}
-  audioSource: {fileID: 0}
-  hitSound: {fileID: 0}
-  shootSound: {fileID: 0}
-  dashSound: {fileID: 0}
-  dieSound: {fileID: 0}
-  obstacleLayer:
-    m_Bits: 0
-  playerTransform: {fileID: 0}
-  healthUI: {fileID: 1308410364}
-  rb: {fileID: 0}
-  sr: {fileID: 0}
-  anim: {fileID: 0}
-  olhandoDireita: 1
-  lastShootTime: -999
-  lastMeleeTime: -999
-  lastDashTime: -999
-  fase2: 0
-  isDead: 0
-  originalScale: {x: 0, y: 0}
 --- !u!50 &2115446860
 Rigidbody2D:
   serializedVersion: 5
@@ -701132,6 +701173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vida: 50
+  barraDeVida: {fileID: 0}
   velocidade: 2
   distanciaDePerseguir: 10
   distanciaDeAtaque: 4
@@ -701536,7 +701578,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2867768251666473091, guid: d85a4aff71a8f7a4298f418ceca98edd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 29719556}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d85a4aff71a8f7a4298f418ceca98edd, type: 3}
 --- !u!1001 &8707980045061499868

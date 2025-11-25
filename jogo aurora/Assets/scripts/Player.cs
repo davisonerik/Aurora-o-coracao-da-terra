@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public float Speed;
     private Rigidbody2D rig;
     public float JumpForce;
@@ -10,23 +9,28 @@ public class Player : MonoBehaviour
     public bool isJumping;
     public bool doubleJump;
     private Animator anim;
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [Header("Áudio")]
+    public AudioSource audioSource;
+    public AudioClip somPulo;
+
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        // Se esquecer de colocar, tenta pegar automaticamente
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-      Move();
-      Jump();
+        Move();
+        Jump();
     }
 
-    void Move() 
+    void Move()
     {
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * Speed;
@@ -36,19 +40,17 @@ public class Player : MonoBehaviour
             anim.SetBool("walk", true);
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
-        
+
         if (Input.GetAxis("Horizontal") < 0f)
         {
             anim.SetBool("walk", true);
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
-        
+
         if (Input.GetAxis("Horizontal") == 0f)
         {
             anim.SetBool("walk", false);
         }
-
-        
     }
 
     void Jump()
@@ -60,21 +62,23 @@ public class Player : MonoBehaviour
                 rig.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
                 doubleJump = true;
                 anim.SetTrigger("JumpT");
-            }
-            else
-            {
-                if (doubleJump)
-                {
-                    rig.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
 
-                    doubleJump = false;
-                }
+                // 🔊 Som do primeiro pulo
+                audioSource.PlayOneShot(somPulo);
             }
-          
+            else if (doubleJump)
+            {
+                rig.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
+                doubleJump = false;
+
+                // 🔊 Som do segundo pulo
+                audioSource.PlayOneShot(somPulo);
+            }
+
             isJumping = true;
         }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 8)
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour
             isJumping = false;
         }
     }
-     
+
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 8)
@@ -90,6 +94,4 @@ public class Player : MonoBehaviour
             isJumping = true;
         }
     }
-    
-    
 }

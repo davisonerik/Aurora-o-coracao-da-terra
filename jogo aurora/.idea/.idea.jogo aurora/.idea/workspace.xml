@@ -14,6 +14,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/chefão/BossHealthBar.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@91afae292a4e/Editor/GridEditorUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e/Editor/VisualStudioEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@9496653a3df6/Editor/TMP/TMP_FontAsset_CreationMenu.cs" root0="SKIP_HIGHLIGHTING" />
@@ -118,6 +119,7 @@
       <workItem from="1763463049113" duration="3464000" />
       <workItem from="1763491825663" duration="5627000" />
       <workItem from="1763595167244" duration="3359000" />
+      <workItem from="1764070362560" duration="3205000" />
     </task>
     <servers />
   </component>

@@ -4,11 +4,15 @@ public class chefao : MonoBehaviour
 {
     [Header("Vida do Inimigo")]
     public int vida = 50;
+    private int vidaMaxima;
+
+    [Header("Referência da Barra de Vida")]
+    public BossHealthBar barraDeVida;
 
     [Header("Movimentação")]
     public float velocidade = 2f;
-    public float distanciaDePerseguir = 10f;  // distancia para começar a perseguir
-    public float distanciaDeAtaque = 8f;      // agora ele atira de longe
+    public float distanciaDePerseguir = 10f;  
+    public float distanciaDeAtaque = 8f;      
 
     [Header("Ataque Especial (Chuva de Fogo)")]
     public GameObject fireRainSpawnerPrefab;
@@ -21,6 +25,8 @@ public class chefao : MonoBehaviour
 
     void Start()
     {
+        vidaMaxima = vida;
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -30,6 +36,12 @@ public class chefao : MonoBehaviour
             player = p.transform;
         else
             Debug.LogError("⚠ ERRO: Player não tem tag 'Player'");
+
+        // Inicializa barra de vida
+        if (barraDeVida != null)
+            barraDeVida.Setup(this);
+        else
+            Debug.LogError("⚠ ERRO: A barra de vida do chefão não foi atribuída no Inspector!");
     }
 
     void Update()
@@ -38,7 +50,6 @@ public class chefao : MonoBehaviour
 
         float distancia = Vector2.Distance(transform.position, player.position);
 
-        // Se muito longe = idle
         if (distancia > distanciaDePerseguir)
         {
             rb.linearVelocity = Vector2.zero;
@@ -46,14 +57,12 @@ public class chefao : MonoBehaviour
             return;
         }
 
-        // Se perto o suficiente para atacar
         if (distancia <= distanciaDeAtaque)
         {
             Atacar();
             rb.linearVelocity = Vector2.zero;
             anim.SetBool("walk", false);
 
-            // Virar para o player
             if (player.position.x > transform.position.x)
                 transform.eulerAngles = Vector3.zero;
             else
@@ -62,7 +71,6 @@ public class chefao : MonoBehaviour
             return;
         }
 
-        // Caso contrário → perseguir
         Perseguir();
     }
 
@@ -88,13 +96,16 @@ public class chefao : MonoBehaviour
 
         anim.SetTrigger("attack");
 
-        // Instancia chuva de fogo mirando no player
         Instantiate(fireRainSpawnerPrefab, player.position, Quaternion.identity);
     }
 
     public void TomarDano(int dano)
     {
         vida -= dano;
+
+        // Atualiza barra
+        if (barraDeVida != null)
+            barraDeVida.AtualizarBarra(vida, vidaMaxima);
 
         if (vida <= 0)
             Destroy(gameObject);

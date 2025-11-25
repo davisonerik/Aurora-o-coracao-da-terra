@@ -9,7 +9,11 @@ public class PlayerAttack : MonoBehaviour
     public float tempoEntreTiros = 0.8f;
 
     [Header("Configurações Opcionais")]
-    public float tempoDestruicaoProjetil = 3f; // Destrói o projétil após X segundos
+    public float tempoDestruicaoProjetil = 3f;
+
+    [Header("Áudio")]
+    public AudioSource audioSource;
+    public AudioClip somAtaque;
 
     private Animator anim;
     private float ultimoTiro;
@@ -17,6 +21,9 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -30,40 +37,35 @@ public class PlayerAttack : MonoBehaviour
 
     void Atacar()
     {
-        // 1️⃣ Executa animação de ataque
+        // 🔊 Som de ataque
+        audioSource.PlayOneShot(somAtaque);
+
+        // Animação
         if (anim != null)
         {
             anim.SetBool("IsAttacking", true);
             Invoke(nameof(ResetarAnimacao), 0.4f);
         }
 
-        // 2️⃣ Cria o projetil no ponto de disparo
+        // Instancia o projetil
         GameObject projetil = Instantiate(projetilPrefab, pontoDeDisparo.position, Quaternion.identity);
 
-        // 3️⃣ Detecta direção baseada na rotação do player (0 = direita, 180 = esquerda)
         float direcao = (transform.eulerAngles.y == 180f) ? -1f : 1f;
 
-        // 4️⃣ Define velocidade do tiro
         Rigidbody2D rb = projetil.GetComponent<Rigidbody2D>();
         if (rb != null)
-        {
             rb.linearVelocity = new Vector2(direcao * velocidadeDoTiro, 0f);
-        }
 
-        // 5️⃣ Vira o sprite do projetil pro lado certo
         Vector3 escala = projetil.transform.localScale;
         escala.x = Mathf.Abs(escala.x) * direcao;
         projetil.transform.localScale = escala;
 
-        // 6️⃣ Destrói o projétil após um tempo
         Destroy(projetil, tempoDestruicaoProjetil);
     }
 
     void ResetarAnimacao()
     {
         if (anim != null)
-        {
             anim.SetBool("IsAttacking", false);
-        }
     }
 }
